@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Refinance Path | The Future of Wealth Management</title>
+    <link rel="icon" type="image/png" href="https://image.s7.sfmc-content.com/lib/fe2911717d640474771277/m/1/2c6b88a2-e310-4ffd-bc64-b4c1993872d9.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f9fafb;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        #cursor-dot {
+            width: 8px; height: 8px; background-color: var(--primary);
+            position: fixed; pointer-events: none; z-index: 9999;
+            border-radius: 50%; transition: transform 0.1s ease;
+        }
+        #cursor-outline {
+            width: 40px; height: 40px; border: 2px solid var(--primary);
+            position: fixed; pointer-events: none; z-index: 9998;
+            border-radius: 50%; transition: transform 0.15s ease-out, opacity 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card {
+            background: white;
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .hero-mesh {
+            position: absolute;
+            top: 0; right: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.15), transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(168, 85, 247, 0.15), transparent 40%);
+            z-index: -1;
+        }
+
+        #path-image-container img {
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        @media (max-width: 1024px) {
+            #cursor-dot, #cursor-outline { display: none; }
+            body { cursor: auto; }
+            .bento-card:hover { transform: none; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <!-- Announcement Bar -->
+    <div class="bg-indigo-600 text-white py-2 px-4 text-center text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] relative z-[110]">
+        <span>✨ New: Strategic Wealth Assessment for 2026 is now live.</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 w-full z-[100] bg-white/70 backdrop-blur-xl border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-10">
+                <a href="#" class="flex items-center">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/4298597b-7e1b-441a-8a66-885b3745e28a.png" alt="Smart Refinance Path Logo" class="h-14 w-auto rounded-lg">
+                </a>
+                <div class="hidden lg:flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+                    <a href="#features" class="hover:text-indigo-600 transition-colors">Solutions</a>
+                    <a href="#how-it-works" class="hover:text-indigo-600 transition-colors">Pathways</a>
+                    <a href="#advantages" class="hover:text-indigo-600 transition-colors">Advantages</a>
+                    <a href="#team" class="hover:text-indigo-600 transition-colors">Team</a>
+                    <a href="#enquiry" class="hover:text-indigo-600 transition-colors">Enquiry</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="bg-indigo-600 text-white px-5 md:px-7 py-2.5 md:py-3 rounded-full text-sm font-bold hover:bg-indigo-700 transition-all active:scale-95">
+                    Consult an Expert
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-6 md:pt-12 pb-16 md:pb-24 px-6 overflow-hidden min-h-[70vh] flex items-center">
+        <div class="hero-mesh"></div>
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="space-y-8 md:space-y-10 reveal">
+                <div class="inline-flex items-center gap-3 bg-white border border-slate-100 shadow-sm px-4 py-1.5 md:px-5 md:py-2 rounded-full text-indigo-600 text-[10px] md:text-xs font-black tracking-widest uppercase">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                    </span>
+                    Join the 2026 Wealth Revolution
+                </div>
+                <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-slate-900 leading-[1.1] md:leading-[0.9] tracking-tight">
+                    Refinance. <br class="hidden sm:block"/> Invest. <br/> <span class="gradient-text">Prosper.</span>
+                </h1>
+                <p class="text-base md:text-xl text-slate-500 max-w-lg leading-relaxed font-medium">
+                    We don't just give advice. We build paths. Transform high-interest debt into high-yield investment opportunities with certified consultants.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-5">
+                    <button class="bg-slate-900 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-indigo-600 transition-all shadow-xl group">
+                        Start Your Path <span class="inline-block transition-transform group-hover:translate-x-2">→</span>
+                    </button>
+                    <button class="bg-white border border-slate-200 text-slate-900 px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-base md:text-lg hover:bg-slate-50 transition-all">
+                        Sample Portfolios
+                    </button>
+                </div>
+            </div>
+            <div class="relative reveal delay-300">
+                <div class="float-anim">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop" 
+                         alt="Financial Dashboard" 
+                         class="w-full h-auto rounded-[40px] md:rounded-[60px] shadow-2xl border-[8px] md:border-[12px] border-white ring-1 ring-slate-100">
+                </div>
+                <div class="absolute -bottom-6 -left-6 md:-left-12 bg-white p-4 md:p-6 rounded-3xl shadow-2xl border border-slate-50 max-w-[200px] md:max-w-[240px] animate-bounce">
+                    <div class="flex items-center gap-3 mb-2 md:mb-4">
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">✓</div>
+                        <p class="text-[10px] md:text-xs font-bold text-slate-400 uppercase">Rate Found</p>
+                    </div>
+                    <p class="text-xl md:text-2xl font-black text-slate-900">2.85% <span class="text-xs font-bold text-green-500">APR</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Ticker -->
+    <div class="bg-white py-12 border-y border-slate-50 overflow-hidden">
+        <div class="ticker-track opacity-50 grayscale contrast-150">
+            <div class="flex items-center gap-12 md:gap-24 px-6">
+                <span class="text-xl md:text-2xl font-black tracking-tighter">FINANCE</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">STOCKS</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">INVEST</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">CONSULTANT</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">FIDUCIARY</span>
+            </div>
+            <div class="flex items-center gap-12 md:gap-24 px-6">
+                <span class="text-xl md:text-2xl font-black tracking-tighter">FINANCE</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">STOCKS</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">INVEST</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">CONSULTANT</span>
+                <span class="text-xl md:text-2xl font-black tracking-tighter">FIDUCIARY</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16 md:mb-20 space-y-4 reveal">
+            <h2 class="text-3xl md:text-5xl font-black text-slate-900">Elite Wealth Tools</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto text-base md:text-lg">Institutional-grade tech and consulting tailored to your personal growth.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+            <div class="md:col-span-8 bento-card h-[400px] md:h-[500px] bg-slate-900 reveal overflow-hidden group">
+                <img src="https://images.pexels.com/photos/5831251/pexels-photo-5831251.jpeg" 
+                     alt="AI Market Data visualization" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
+                <div class="relative z-10 p-8 md:p-12 h-full flex flex-col justify-end">
+                    <h3 class="text-3xl md:text-4xl font-black text-white mb-4">AI Market Signals</h3>
+                    <p class="text-slate-100 max-w-md text-sm md:text-base font-medium">Our advanced algorithms process billions of data points to generate high-precision buy/sell signals instantly.</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 bento-card p-8 md:p-10 bg-indigo-600 text-white flex flex-col reveal delay-100">
+                <div class="mb-auto">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6 backdrop-blur-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-black mb-4">Refinance Rescue</h3>
+                    <p class="text-indigo-100 text-sm">Slash interest rates by comparing 200+ lenders instantly.</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=400&auto=format&fit=crop" 
+                     class="mt-8 rounded-2xl grayscale brightness-125 mix-blend-screen" alt="Calculations">
+            </div>
+
+            <div class="md:col-span-4 bento-card p-8 md:p-10 bg-white border border-slate-100 reveal">
+                <h3 class="text-2xl font-black text-slate-900 mb-4">Expert Support</h3>
+                <p class="text-slate-500 text-sm mb-6">Human advisors available via chat at a moment's notice.</p>
+                <div class="flex -space-x-3">
+                    <img src="https://i.pravatar.cc/100?u=11" class="w-10 h-10 rounded-full border-2 border-white" alt="Advisor">
+                    <img src="https://i.pravatar.cc/100?u=12" class="w-10 h-10 rounded-full border-2 border-white" alt="Advisor">
+                    <img src="https://i.pravatar.cc/100?u=13" class="w-10 h-10 rounded-full border-2 border-white" alt="Advisor">
+                </div>
+            </div>
+
+            <div class="md:col-span-8 bento-card p-8 md:p-12 bg-slate-50 reveal delay-200 overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="flex-1 space-y-6">
+                        <h3 class="text-3xl md:text-4xl font-black text-slate-900">Custom Portfolios</h3>
+                        <p class="text-slate-500 text-sm md:text-base leading-relaxed">From Dividend Kings to high-growth Tech, we build the engine that drives your specific lifestyle dreams.</p>
+                        <button class="text-indigo-600 font-bold flex items-center gap-2 group">
+                            Explore Assets <span class="group-hover:translate-x-2 transition-transform">→</span>
+                        </button>
+                    </div>
+                    <div class="flex-1 relative">
+                        <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop" 
+                             class="rounded-3xl shadow-lg rotate-3 hover:rotate-0 transition-transform duration-500" alt="Market Trends">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="how-it-works" class="py-24 md:py-32 px-6 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 md:gap-20 items-center">
+                <div class="space-y-10 md:space-y-12">
+                    <div class="reveal">
+                        <h2 class="text-4xl md:text-6xl font-black mb-6">A proven path to <br/> financial freedom.</h2>
+                        <p class="text-lg text-slate-400">We’ve simplified the complex world of finance into four actionable steps.</p>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-6 reveal">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white font-black text-lg shrink-0">1</div>
+                            <div>
+                                <h4 class="text-lg md:text-xl font-bold mb-2">Deep Wealth Audit</h4>
+                                <p class="text-slate-400 text-sm md:text-base">We analyze assets and debts to find hidden leaks in your portfolio.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 reveal delay-100">
+                            <div class="w-12 h-12 bg-indigo-600/50 rounded-2xl flex items-center justify-center text-white font-black text-lg shrink-0">2</div>
+                            <div>
+                                <h4 class="text-lg md:text-xl font-bold mb-2">Refinance Rescue</h4>
+                                <p class="text-slate-400 text-sm md:text-base">We negotiate lower rates, freeing up immediate monthly cash flow.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 reveal delay-200">
+                            <div class="w-12 h-12 bg-indigo-600/30 rounded-2xl flex items-center justify-center text-white font-black text-lg shrink-0">3</div>
+                            <div>
+                                <h4 class="text-lg md:text-xl font-bold mb-2">Strategic Deployment</h4>
+                                <p class="text-slate-400 text-sm md:text-base">Your "found money" is invested into tailored, high-performing stock portfolios.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative reveal h-[500px] w-full" id="path-image-container">
+                    <img id="slideshow-image" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop" 
+                         class="absolute inset-0 w-full h-full object-cover rounded-[40px] shadow-2xl brightness-75 border-8 border-slate-800" alt="Finance Analysis">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent pointer-events-none"></div>
+                    <div class="absolute bottom-10 left-10">
+                        <p class="text-3xl font-black text-white">+412%</p>
+                        <p class="text-xs font-bold text-slate-400 tracking-widest uppercase">Avg. 10yr Growth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Advantages -->
+    <section id="advantages" class="py-24 md:py-32 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 md:mb-20 reveal">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">The Strategic Advantage</h2>
+                <p class="text-base md:text-lg text-slate-500 font-medium max-w-2xl mx-auto">Why thousands of high-net-worth individuals trust our path over traditional banks.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-10 bg-slate-50 rounded-[40px] border border-slate-100 reveal">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-4">Risk Mitigation</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Our multi-layered strategy protects your capital during market volatility while capturing upside growth.</p>
+                </div>
+
+                <div class="p-10 bg-indigo-600 text-white rounded-[40px] shadow-2xl shadow-indigo-100 reveal delay-100 scale-105 z-10">
+                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-4">Alpha Generation</h4>
+                    <p class="text-indigo-100 text-sm leading-relaxed">We don't follow the herd. Our analysts identify undervalued assets and debt arbitrage opportunities before they hit the news.</p>
+                </div>
+
+                <div class="p-10 bg-slate-50 rounded-[40px] border border-slate-100 reveal delay-200">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-4">Bespoke Guidance</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Every portfolio is hand-built. You aren't a number in an algorithm; you're a partner in wealth creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-24 md:py-32 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">The Minds Behind Your Path</h2>
+                <p class="text-base md:text-lg text-slate-500 font-medium max-w-2xl mx-auto">Certified experts dedicated to navigating your financial future with precision and care.</p>
+            </div>
+            
+            <div class="flex overflow-x-auto lg:grid lg:grid-cols-5 gap-8 pb-10 lg:pb-0 no-scrollbar snap-x">
+                <!-- Member 1: Satyam Sharma -->
+                <div class="min-w-[280px] snap-center bento-card p-6 reveal">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/3a98a204-3f19-4009-b554-ac7f29231cf9.jpg" 
+                         class="w-full h-64 object-cover rounded-2xl mb-6 grayscale hover:grayscale-0 transition duration-500" alt="Satyam Sharma">
+                    <h4 class="text-xl font-black text-slate-900">Satyam Sharma</h4>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Principal Mortgage Strategist</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">Masterminding optimal refinancing structures to unlock liquidity and minimize long-term interest burdens.</p>
+                </div>
+                <!-- Member 2: Rahul Sinha -->
+                <div class="min-w-[280px] snap-center bento-card p-6 reveal delay-100">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/453c0a4f-676c-4f5b-9eff-7876e6f950e2.jpg" 
+                         class="w-full h-64 object-cover rounded-2xl mb-6 grayscale hover:grayscale-0 transition duration-500" alt="Rahul Sinha">
+                    <h4 class="text-xl font-black text-slate-900">Rahul Sinha</h4>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Senior Portfolio Architect</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">Designing diversified, high-yield asset allocations that align perfectly with individual risk profiles.</p>
+                </div>
+                <!-- Member 3: Ayush Srivastava -->
+                <div class="min-w-[280px] snap-center bento-card p-6 reveal delay-200">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/7ed61586-710f-45a6-aa31-70c463325a7f.jpg" 
+                         class="w-full h-64 object-cover rounded-2xl mb-6 grayscale hover:grayscale-0 transition duration-500" alt="Ayush Srivastava">
+                    <h4 class="text-xl font-black text-slate-900">Ayush Srivastava</h4>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Chief Quantitative Analyst</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">Leveraging advanced mathematical models and AI to pinpoint alpha-generating opportunities in volatile markets.</p>
+                </div>
+                <!-- Member 4: Nikhil Trivedi -->
+                <div class="min-w-[280px] snap-center bento-card p-6 reveal delay-300">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/0c420c5e-7134-4230-8333-e24f006ff027.jpg" 
+                         class="w-full h-64 object-cover rounded-2xl mb-6 grayscale hover:grayscale-0 transition duration-500" alt="Nikhil Trivedi">
+                    <h4 class="text-xl font-black text-slate-900">Nikhil Trivedi</h4>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">Fiduciary Wealth Consultant</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">Providing unbiased, client-first financial guidance rooted in transparency and professional integrity.</p>
+                </div>
+                <!-- Member 5: Deepankar Paswan -->
+                <div class="min-w-[280px] snap-center bento-card p-6 reveal delay-400">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/10dc5668-5bdf-48ae-ae20-dad1b62cc1d6.jpg" 
+                         class="w-full h-64 object-cover rounded-2xl mb-6 grayscale hover:grayscale-0 transition duration-500" alt="Deepankar Paswan">
+                    <h4 class="text-xl font-black text-slate-900">Deepankar Paswan</h4>
+                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-4">FinTech Product Lead</p>
+                    <p class="text-slate-500 text-xs leading-relaxed">Spearheading the development of seamless, institutional-grade tools that simplify complex wealth management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enquiry Form Section -->
+    <section id="enquiry" class="py-24 md:py-32 px-6 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-6xl font-black text-slate-900 mb-8 leading-tight">Let’s map out your <br/> financial future.</h2>
+                    <p class="text-lg text-slate-500 mb-12 leading-relaxed">Ready to optimize your debt and grow your wealth? Fill out the form, and our expert consultants will get back to you within 24 hours.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Email our team</p>
+                                <p class="font-bold text-slate-900 text-lg">hello@smartrefinancepath.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Response time</p>
+                                <p class="font-bold text-slate-900 text-lg">Under 24 Hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bento-card p-8 md:p-12 bg-slate-50 reveal delay-100 shadow-xl shadow-slate-200/50">
+                    <form action="#" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                                <input type="text" placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition shadow-sm placeholder:text-slate-300">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
+                                <input type="email" placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition shadow-sm placeholder:text-slate-300">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Service of Interest</label>
+                            <div class="relative">
+                                <select class="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition shadow-sm appearance-none cursor-pointer">
+                                    <option>Debt Refinance Strategy</option>
+                                    <option>Stock Market Investment</option>
+                                    <option>Bespoke Wealth Management</option>
+                                    <option>General Enquiry</option>
+                                </select>
+                                <div class="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Your Message</label>
+                            <textarea rows="4" placeholder="Tell us a bit about your goals..." class="w-full bg-white border border-slate-200 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition shadow-sm placeholder:text-slate-300"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-5 rounded-full font-black text-lg hover:bg-indigo-700 transition shadow-lg shadow-indigo-100 active:scale-[0.98]">
+                            Submit Enquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 md:py-32 px-6 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-20">
+            <div class="col-span-2 space-y-8">
+                <div class="flex items-center">
+                    <img src="https://image.s12.sfmc-content.com/lib/fe24117371640575711d79/m/1/4298597b-7e1b-441a-8a66-885b3745e28a.png" alt="Smart Refinance Path Logo" class="h-12 w-auto rounded">
+                </div>
+                <p class="text-slate-500 leading-relaxed font-medium text-sm max-w-sm">Democratizing elite wealth management through technology and transparency. Providing institutional-grade tools to every investor.</p>
+            </div>
+            <div>
+                <h5 class="font-black text-slate-900 mb-6 uppercase tracking-widest text-[10px]">Solutions</h5>
+                <ul class="space-y-3 text-slate-500 font-bold text-sm">
+                    <li><a href="#" class="hover:text-indigo-600">Refinancing</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Stock Alerts</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Consulting</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="font-black text-slate-900 mb-6 uppercase tracking-widest text-[10px]">Resources</h5>
+                <ul class="space-y-3 text-slate-500 font-bold text-sm">
+                    <li><a href="#" class="hover:text-indigo-600">Market News</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Success Stories</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-20 pt-10 border-t border-slate-50 flex flex-col md:flex-row justify-between text-[10px] font-bold text-slate-400 uppercase tracking-widest gap-6">
+            <p>© 2026 Smart Refinance Path Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+            setTimeout(() => {
+                outline.style.left = `${posX - 20}px`;
+                outline.style.top = `${posY - 20}px`;
+            }, 50);
+        });
+
+        const interactiveElements = document.querySelectorAll('button, a, .bento-card, select, input, textarea');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                outline.style.transform = 'scale(1.5)';
+                outline.style.backgroundColor = 'rgba(99, 102, 241, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                outline.style.transform = 'scale(1)';
+                outline.style.backgroundColor = 'transparent';
+            });
+        });
+
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const pathImages = [
+            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+            "https://images.pexels.com/photos/7947707/pexels-photo-7947707.jpeg",
+            "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?q=80&w=1200&auto=format&fit=crop"
+        ];
+        
+        let currentSlide = 0;
+        const slideImg = document.getElementById('slideshow-image');
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % pathImages.length;
+            slideImg.style.opacity = 0;
+            setTimeout(() => {
+                slideImg.src = pathImages[currentSlide];
+                slideImg.style.opacity = 0.75;
+            }, 800);
+        }, 2000);
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
